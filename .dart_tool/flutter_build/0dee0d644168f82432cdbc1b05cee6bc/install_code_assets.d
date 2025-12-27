@@ -1,0 +1,1 @@
+ /Users/lusitic/Documents/project/flutter_project/prj_genesis/.dart_tool/flutter_build/0dee0d644168f82432cdbc1b05cee6bc/native_assets.json: 
