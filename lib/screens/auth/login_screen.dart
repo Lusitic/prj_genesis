@@ -65,130 +65,174 @@ class _LoginScreenState extends State<LoginScreen> {
       //appBar: AppBar(
       //  title: const Text("Login"),
       //),
+      resizeToAvoidBottomInset: true,
       body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(20),
-            child: ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: 420),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    const SizedBox(height: 16),
-                    Text(
-                      "Welcome back",
-                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                        fontWeight: FontWeight.w800,
-                        color: Colors.white,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      "Sign In.",
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Colors.white.withOpacity(0.7),
-                      ),
-                    ),
-                    const SizedBox(height: 24),
-                    // Email
-                    TextFormField(
-                      controller: _emailCtrl,
-                      keyboardType: TextInputType.emailAddress,
-                      textInputAction: TextInputAction.next,
-                      autofillHints: const [AutofillHints.email],
-                      decoration: const InputDecoration(
-                        labelText: "Email",
-                        hintText: "example@email.com",
-                        border: OutlineInputBorder(),
-                      ),
-                      style: const TextStyle(
-                        color: Colors.white,
-                      ),
-                      validator: (v) {
-                        final s = (v ?? "").trim();
-                        if(s.isEmpty) return "Please enter your email.";
+        child: Stack(
+          children: [
+            LayoutBuilder(
+              builder: (context, constraints) {
+                return CustomScrollView(
+                  slivers: [
+                    SliverFillRemaining(
+                      hasScrollBody: false,
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 0, 20, 120),
+                        
+                          child: ConstrainedBox(
+                            constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                            child: Column(
+                              children: [
+                                const Spacer(flex: 2),
 
-                        // 간단한 이메일 체크
-                        if(!s.contains('@') || !s.contains('.')) return 'Invaild email format.';
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 12),
-                    // Password
-                    TextFormField(
-                      controller: _pwCtrl,
-                      obscureText: _obscure,
-                      textInputAction: TextInputAction.done,
-                      autofillHints: const [AutofillHints.password],
-                      decoration: InputDecoration(
-                        labelText: "Password",
-                        border: const OutlineInputBorder(),
-                        suffixIcon: IconButton(
-                          onPressed: () => setState(() => _obscure = !_obscure), 
-                          icon: Icon(_obscure ? Icons.visibility : Icons.visibility_off),
-                        ),
-                      ),
-                      style: const TextStyle(
-                        color: Colors.white,
-                      ),
-                      validator: (v) {
-                        final s = (v ?? "");
-                        if(s.isEmpty) return "Please enter your password.";
-                        if(s.length < 6) return "Password must be at least 6.";
-                        return null;
-                      },
-                      onFieldSubmitted: (_) => canPress ? _login() : null,
-                    ),
-                    const SizedBox(height: 10),
-                    // Forgot password
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: TextButton(
-                        onPressed: () {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text("Reset password function connect to next step."))
-                          );
-                        }, 
-                        child: const Text("Forgot password?"),
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    // Login button
-                    FilledButton(
-                      onPressed: canPress ? _login : null, 
-                      style: FilledButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(vertical: 14),
-                      ),
-                      child: _loading
-                        ? const SizedBox(
-                          height: 18,
-                          width: 18,
-                          child: CircularProgressIndicator(strokeWidth: 2),
-                        )
-                        : const Text("Login"),
-                    ),
-                    const SizedBox(height: 12),
-                    // Signup
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          "You not have an account?",
-                          style: TextStyle(color: Colors.white),),
-                        TextButton(
-                          onPressed: _goSignup,
-                          child: const Text("Sign up"),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 8),
+                                ConstrainedBox(
+                                  constraints: BoxConstraints(maxWidth: 420),
+                                  child: Form(
+                                    key: _formKey,
+                                    child: Column(
+                                      mainAxisSize:  MainAxisSize.min,
+                                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                                      children: [
+                                        const SizedBox(height: 16),
+                                        Text(
+                                          "Welcome back",
+                                          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                            fontWeight: FontWeight.w800,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 8),
+                                        Text(
+                                          "Anytime, Anywhere, with one account.",
+                                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                            color: Colors.white.withOpacity(0.7),
+                                          ),
+                                        ),
+                                        const SizedBox(height: 24),
+                                        // Email
+                                        TextFormField(
+                                          controller: _emailCtrl,
+                                          keyboardType: TextInputType.emailAddress,
+                                          textInputAction: TextInputAction.next,
+                                          autofillHints: const [AutofillHints.email],
+                                          decoration: const InputDecoration(
+                                            labelText: "Email",
+                                            hintText: "example@email.com",
+                                            border: OutlineInputBorder(),
+                                          ),
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                          ),
+                                          validator: (v) {
+                                            final s = (v ?? "").trim();
+                                            if(s.isEmpty) return "Please enter your email.";
+
+                                            // 간단한 이메일 체크
+                                            if(!s.contains('@') || !s.contains('.')) return 'Invaild email format.';
+                                            return null;
+                                          },
+                                        ),
+                                        const SizedBox(height: 12),
+                                        // Password
+                                        TextFormField(
+                                          controller: _pwCtrl,
+                                          obscureText: _obscure,
+                                          textInputAction: TextInputAction.done,
+                                          autofillHints: const [AutofillHints.password],
+                                          decoration: InputDecoration(
+                                            labelText: "Password",
+                                            border: const OutlineInputBorder(),
+                                            suffixIcon: IconButton(
+                                              onPressed: () => setState(() => _obscure = !_obscure), 
+                                              icon: Icon(_obscure ? Icons.visibility : Icons.visibility_off),
+                                            ),
+                                          ),
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                          ),
+                                          validator: (v) {
+                                            final s = (v ?? "");
+                                            if(s.isEmpty) return "Please enter your password.";
+                                            if(s.length < 6) return "Password must be at least 6.";
+                                            return null;
+                                          },
+                                          onFieldSubmitted: (_) => canPress ? _login() : null,
+                                        ),
+                                        const SizedBox(height: 10),
+                                        // Forgot password
+                                        Align(
+                                          alignment: Alignment.centerRight,
+                                          child: TextButton(
+                                            onPressed: () {
+                                              ScaffoldMessenger.of(context).showSnackBar(
+                                                const SnackBar(content: Text("Reset password function connect to next step."))
+                                              );
+                                            }, 
+                                            child: const Text("Forgot password?"),
+                                          ),
+                                        ),
+                                        const SizedBox(height: 10),
+                                        // Login button
+                                        FilledButton(
+                                          onPressed: canPress ? _login : null, 
+                                          style: FilledButton.styleFrom(
+                                            padding: const EdgeInsets.symmetric(vertical: 14),
+                                          ),
+                                          child: _loading
+                                            ? const SizedBox(
+                                              height: 18,
+                                              width: 18,
+                                              child: CircularProgressIndicator(strokeWidth: 2),
+                                            )
+                                            : const Text("Login"),
+                                        ),
+                                        const SizedBox(height: 12),
+                                        // Signup
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            const Text(
+                                              "You not have an account?",
+                                              style: TextStyle(color: Colors.white),),
+                                            TextButton(
+                                              onPressed: _goSignup,
+                                              child: const Text("Sign up"),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                const Spacer(flex: 3)
+                              ],
+                            )
+                          )
+                        
+                      )
+                    )
                   ],
+                  
+                  
+                );
+              }
+            ),
+
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 0,
+              child: Center(
+                child: Text(
+                  "Lusitic © 2026. All rights reserved.",
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.white.withOpacity(0.45),
+                    letterSpacing: 0.3,
+                  ),
                 ),
               ),
             ),
-          ),
+          ],  
         ),
       ),
     );
