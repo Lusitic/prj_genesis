@@ -103,6 +103,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         hintText: "example@email.com",
                         border: OutlineInputBorder(),
                       ),
+                      style: const TextStyle(
+                        color: Colors.white,
+                      ),
                       validator: (v) {
                         final s = (v ?? "").trim();
                         if(s.isEmpty) return "Please enter your email.";
@@ -126,6 +129,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           onPressed: () => setState(() => _obscure = !_obscure), 
                           icon: Icon(_obscure ? Icons.visibility : Icons.visibility_off),
                         ),
+                      ),
+                      style: const TextStyle(
+                        color: Colors.white,
                       ),
                       validator: (v) {
                         final s = (v ?? "");
