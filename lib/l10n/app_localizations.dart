@@ -173,7 +173,7 @@ abstract class AppLocalizations {
   /// No description provided for @loginSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Sign in to continue'**
+  /// **'Anytime, Anywhere, with one account.'**
   String get loginSubtitle;
 
   /// No description provided for @email.

@@ -48,7 +48,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get welcomeBack => 'Welcome back';
 
   @override
-  String get loginSubtitle => 'Sign in to continue';
+  String get loginSubtitle => 'Anytime, Anywhere, with one account.';
 
   @override
   String get email => 'Email';
