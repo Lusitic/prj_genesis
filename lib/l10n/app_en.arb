@@ -1,0 +1,28 @@
+{
+  "@@locale": "en",
+
+  "onboarding_main": "Bring your collection to life.",
+  "onboarding_main_sub": "Beyond the display, into the spotlight.",
+  "onboarding_light_main": "Set the perfect mood.",
+  "onboarding_light_sub": "Tailor the lighting to match the soul of your figures.\nEvery shade tells a different story.",
+  "onboarding_humi_main": "Timeless beauty, preserved.",
+  "onboarding_humi_sub": "Keep your prized possessions in pristine condition.\nWe protect them from the elements.",
+  "onboarding_rotate_main": "Art in every angle.",
+  "onboarding_rotate_sub": "Experience dynamic 360° views.\nDiscover hidden details with smooth, precision-controlled rotation.",
+  "onboarding_start_main": "Ready to create your own sanctuary?",
+  "onboarding_start_sub": "Start My Gallery.",
+
+
+  "welcomeBack": "Welcome back",
+  "loginSubtitle": "Sign in to continue",
+  "email": "Email",
+  "empty_email": "Please enter your email.",
+  "invaild_email_format": "Invaild email format.",
+  "password": "Password",
+  "empty_password": "Please enter your password",
+  "lower_6letters": "Password must be at least 6.",
+  "forget_password": "Forgot password?",
+  "not_have_account": "You not have an account?",
+  "sign_up": "Sign up",
+  "login": "Login"
+}

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../home/home.dart';
 
+import '../../l10n/app_localizations.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -58,6 +60,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final t = AppLocalizations.of(context)!;
     final canPress = !_loading;
 
     return Scaffold(
@@ -94,7 +97,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                       children: [
                                         const SizedBox(height: 16),
                                         Text(
-                                          "Welcome back",
+                                          // "Welcome Back"
+                                          t.welcomeBack,
                                           style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                                             fontWeight: FontWeight.w800,
                                             color: Colors.white,
@@ -102,7 +106,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                         ),
                                         const SizedBox(height: 8),
                                         Text(
-                                          "Anytime, Anywhere, with one account.",
+                                          //"Anytime, Anywhere, with one account.",
+                                          t.loginSubtitle,
                                           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                                             color: Colors.white.withOpacity(0.7),
                                           ),
@@ -114,8 +119,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                           keyboardType: TextInputType.emailAddress,
                                           textInputAction: TextInputAction.next,
                                           autofillHints: const [AutofillHints.email],
-                                          decoration: const InputDecoration(
-                                            labelText: "Email",
+                                          decoration: InputDecoration(
+                                            //labelText: "Email",
+                                            labelText: t.email,
                                             hintText: "example@email.com",
                                             border: OutlineInputBorder(),
                                           ),
@@ -124,10 +130,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                           ),
                                           validator: (v) {
                                             final s = (v ?? "").trim();
-                                            if(s.isEmpty) return "Please enter your email.";
+                                            //if(s.isEmpty) return "Please enter your email.";
+                                            if(s.isEmpty) return t.empty_email;
 
                                             // 간단한 이메일 체크
-                                            if(!s.contains('@') || !s.contains('.')) return 'Invaild email format.';
+                                            //if(!s.contains('@') || !s.contains('.')) return 'Invaild email format.';
+                                            if(!s.contains('@') || !s.contains('.')) return t.invaild_email_format;
                                             return null;
                                           },
                                         ),
@@ -139,7 +147,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                           textInputAction: TextInputAction.done,
                                           autofillHints: const [AutofillHints.password],
                                           decoration: InputDecoration(
-                                            labelText: "Password",
+                                            //labelText: "Password",
+                                            labelText: t.password,
                                             border: const OutlineInputBorder(),
                                             suffixIcon: IconButton(
                                               onPressed: () => setState(() => _obscure = !_obscure), 
@@ -151,8 +160,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                           ),
                                           validator: (v) {
                                             final s = (v ?? "");
-                                            if(s.isEmpty) return "Please enter your password.";
-                                            if(s.length < 6) return "Password must be at least 6.";
+                                            //if(s.isEmpty) return "Please enter your password.";
+                                            //if(s.length < 6) return "Password must be at least 6.";
+                                            if(s.isEmpty) return t.empty_password;
+                                            if(s.length < 6) return t.lower_6letters;
                                             return null;
                                           },
                                           onFieldSubmitted: (_) => canPress ? _login() : null,
@@ -167,7 +178,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                                 const SnackBar(content: Text("Reset password function connect to next step."))
                                               );
                                             }, 
-                                            child: const Text("Forgot password?"),
+                                            //child: const Text("Forgot password?"),
+                                            child: Text(t.forget_password),
                                           ),
                                         ),
                                         const SizedBox(height: 10),
@@ -183,19 +195,22 @@ class _LoginScreenState extends State<LoginScreen> {
                                               width: 18,
                                               child: CircularProgressIndicator(strokeWidth: 2),
                                             )
-                                            : const Text("Login"),
+                                            //: const Text("Login"),
+                                            : Text(t.login),
                                         ),
                                         const SizedBox(height: 12),
                                         // Signup
                                         Row(
                                           mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
-                                            const Text(
-                                              "You not have an account?",
+                                            Text(
+                                              //"You not have an account?",
+                                              t.not_have_account,
                                               style: TextStyle(color: Colors.white),),
                                             TextButton(
                                               onPressed: _goSignup,
-                                              child: const Text("Sign up"),
+                                              //child: const Text("Sign up"),
+                                              child: Text(t.sign_up),
                                             ),
                                           ],
                                         ),

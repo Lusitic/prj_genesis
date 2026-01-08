@@ -1,6 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'l10n/app_localizations.dart';
+
 // screens 폴더에 있는 home.dart를 import
 import 'screens/home/home.dart';
 import 'screens/onboarding/onboarding_screen.dart';
@@ -28,6 +31,18 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'PRJ_GENESIS',
       debugShowCheckedModeBanner: false,
+
+      supportedLocales: const [
+        Locale("en"),
+        Locale("ko"),
+      ],
+
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
 
       // 앱 공통 테마
       theme: ThemeData(

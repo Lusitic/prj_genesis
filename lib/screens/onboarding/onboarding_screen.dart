@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import '../../utilities/app_prefs.dart';
 import '../auth/login_screen.dart';
 
+import '../../l10n/app_localizations.dart';
+
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
 
@@ -17,38 +19,38 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   int _index = 0;
 
   // Onbording page data
-  final List<_OnboardingPageData> _pages = const [
-    _OnboardingPageData(
-      title: 'Bring your collection to life.',
-      subtitle: 'Beyond the display, into the spotlight.',
+  final _pages = const [
+    OnboardingPageData(
+      titleKey: "onboarding_main",
+      subtitleKey: "onboarding_main_sub",
       //icon: Icons.auto_awesome,
       lottieAsset: 'assets/lottie/twinkle_loading.json',
       bg: Color(0xFF1D1E3A),
     ),
-    _OnboardingPageData(
-      title: 'Set the perfect mood.',
-      subtitle: 'Tailor the lighting to match the soul of your figures.\nEvery shade tells a different story.',
+    OnboardingPageData(
+      titleKey: "onboarding_light_main",
+      subtitleKey: "onboarding_light_sub",
       //icon: Icons.palette_outlined,
       lottieAsset: 'assets/lottie/light.json',
       bg: Color(0xFF1D1E3A),
     ),
-    _OnboardingPageData(
-      title: 'Timeless beauty, preserved.',
-      subtitle: 'Keep your prized possessions in pristine condition.\nWe protect them from the elements.',
+    OnboardingPageData(
+      titleKey: "onboarding_humi_main",
+      subtitleKey: "onboarding_humi_sub",
       //icon: Icons.water_drop_outlined,
       lottieAsset: 'assets/lottie/water.json',
       bg: Color(0xFF1D1E3A),
     ),
-    _OnboardingPageData(
-      title: 'Art in every angle.',
-      subtitle: 'Experience dynamic 360° views.\nDiscover hidden details with smooth, precision-controlled rotation.',
+    OnboardingPageData(
+      titleKey: "onboarding_rotate_main",
+      subtitleKey: "onboarding_rotate_sub",
       //icon: Icons.threesixty_outlined,
       lottieAsset: 'assets/lottie/gears.json',
       bg: Color(0xFF1D1E3A),
     ),
-    _OnboardingPageData(
-      title: 'Ready to create your own sanctuary?',
-      subtitle: 'Start My Gallery.',
+    OnboardingPageData(
+      titleKey: "onboarding_start_main",
+      subtitleKey: "onboarding_start_sub",
       //icon: Icons.rocket_launch_outlined,
       lottieAsset: 'assets/lottie/start.json',
       bg: Color(0xFF1D1E3A),
@@ -88,9 +90,37 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 
+  String _resolve(AppLocalizations t, String key) {
+    switch (key) {
+      case 'onboarding_main':
+        return t.onboarding_main;
+      case 'onboarding_main_sub':
+        return t.onboarding_main_sub;
+      case 'onboarding_light_main':
+        return t.onboarding_light_main;
+      case 'onboarding_light_sub':
+        return t.onboarding_light_sub;
+      case 'onboarding_humi_main':
+        return t.onboarding_humi_main;
+      case 'onboarding_humi_sub':
+        return t.onboarding_humi_sub;
+      case 'onboarding_rotate_main':
+        return t.onboarding_rotate_main;
+      case 'onboarding_rotate_sub':
+        return t.onboarding_rotate_sub;
+      case 'onboarding_start_main':
+        return t.onboarding_start_main;
+      case 'onboarding_start_sub':
+        return t.onboarding_start_sub;
+      default:
+        return '';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     // 배경색은 현재 페이지 기준으로 바뀌게 (하단 고정 영역 포함)
+    final t = AppLocalizations.of(context)!;
     final bg = _pages[_index].bg;
 
     return Scaffold(
@@ -183,7 +213,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            p.title, 
+                            //p.title, 
+                            _resolve(t, p.titleKey),
                             style: const TextStyle(
                               color: Colors.white, 
                               fontSize: 34,
@@ -197,7 +228,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            p.subtitle, 
+                            //p.subtitle, 
+                            _resolve(t, p.subtitleKey),
                             style: TextStyle(
                               color: Colors.white.withOpacity(0.78), 
                               fontSize: 14,
@@ -324,16 +356,16 @@ class _Dots extends StatelessWidget {
   }
 }
 
-class _OnboardingPageData {
-  final String title;
-  final String subtitle;
+class OnboardingPageData {
+  final String titleKey;
+  final String subtitleKey;
   //final IconData icon;
   final String lottieAsset;
   final Color bg;
 
-  const _OnboardingPageData({
-    required this.title,
-    required this.subtitle,
+  const OnboardingPageData({
+    required this.titleKey,
+    required this.subtitleKey,
     //required this.icon,
     required this.lottieAsset,
     required this.bg,
