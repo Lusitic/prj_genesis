@@ -228,40 +228,67 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             children: [
               _Dots(count: _pages.length, index: _index),
               const SizedBox(height: 16),
-              Row(
-                children: [
-                  Expanded(
-                    child: OutlinedButton(
-                      onPressed: _next, 
-                      style: OutlinedButton.styleFrom(
-                        side: BorderSide(color: Colors.white.withOpacity(0.7)),
-                        foregroundColor: Colors.white, 
-                        padding: const EdgeInsets.symmetric(vertical: 14),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(999),
-                        ),
-                      ),
-                      child: Text(_isLast? 'Next' : 'Next'),
-                    ),
-                  ),
 
-                  const SizedBox(width: 12),
-                  Expanded(
+              AnimatedSwitcher(
+                duration: const Duration(milliseconds: 220),
+                switchInCurve: Curves.easeOut,
+                switchOutCurve: Curves.easeOut,
+                child: _isLast
+                  ? SizedBox(
+                    key: const ValueKey('start_only'),
+                    width: double.infinity,
                     child: FilledButton(
-                      onPressed: _isLast? _finish : null,
+                      onPressed: _finish, 
                       style: FilledButton.styleFrom(
-                        backgroundColor: Colors.white, 
-                        disabledBackgroundColor: Colors.white.withOpacity(0.35),
+                        backgroundColor: Colors.white,
                         foregroundColor: const Color(0xFF1D1E3A),
                         padding: const EdgeInsets.symmetric(vertical: 14),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(999),
                         ),
                       ),
-                      child: const Text('Start'),
-                    ),
+                      child: const Text("Start"),
+                    )
+                  )
+                : Row(
+                    key: const ValueKey("next_and_start"),
+                    children: [
+                      Expanded(
+                        child: OutlinedButton(
+                          //onPressed: _isLast? null : _next, 
+                          onPressed: _next,
+                          style: OutlinedButton.styleFrom(
+                            side: BorderSide(color: Colors.white.withOpacity(0.7)),
+                            foregroundColor: Colors.white, 
+                            padding: const EdgeInsets.symmetric(vertical: 14),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(999),
+                            ),
+                          ),
+                          //child: Text(_isLast? 'Next' : 'Next'),
+                          child: const Text("Next")
+                        ),
+                      ),
+
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: FilledButton(
+                          //onPressed: _isLast? _finish : null,
+                          onPressed: null, // 마지막 전까지 비할성화
+                          style: FilledButton.styleFrom(
+                            backgroundColor: Colors.white, 
+                            disabledBackgroundColor: Colors.white.withOpacity(0.35),
+                            foregroundColor: const Color(0xFF1D1E3A),
+                            padding: const EdgeInsets.symmetric(vertical: 14),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(999),
+                            ),
+                          ),
+                          child: const Text('Start'),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
               ),
             ],
           ),
