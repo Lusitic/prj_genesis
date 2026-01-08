@@ -1,6 +1,7 @@
 {
   "@@locale": "en",
 
+  "language": "Language",
   "onboarding_main": "Bring your collection to life.",
   "onboarding_main_sub": "Beyond the display, into the spotlight.",
   "onboarding_light_main": "Set the perfect mood.",

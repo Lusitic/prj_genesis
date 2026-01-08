@@ -9,6 +9,9 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get language => 'Language';
+
+  @override
   String get onboarding_main => 'Bring your collection to life.';
 
   @override

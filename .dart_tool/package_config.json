@@ -164,6 +164,12 @@
       "languageVersion": "3.5"
     },
     {
+      "name": "nested",
+      "rootUri": "file:///Users/lusitic/.pub-cache/hosted/pub.dev/nested-1.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "path",
       "rootUri": "file:///Users/lusitic/.pub-cache/hosted/pub.dev/path-1.9.1",
       "packageUri": "lib/",
@@ -204,6 +210,12 @@
       "rootUri": "file:///Users/lusitic/.pub-cache/hosted/pub.dev/posix-6.0.3",
       "packageUri": "lib/",
       "languageVersion": "3.0"
+    },
+    {
+      "name": "provider",
+      "rootUri": "file:///Users/lusitic/.pub-cache/hosted/pub.dev/provider-6.1.5+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "shared_preferences",

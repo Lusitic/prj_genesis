@@ -9,6 +9,9 @@ class AppLocalizationsKo extends AppLocalizations {
   AppLocalizationsKo([String locale = 'ko']) : super(locale);
 
   @override
+  String get language => '언어';
+
+  @override
   String get onboarding_main => '당신의 컬렉션에 숨결을 불어넣으세요.';
 
   @override

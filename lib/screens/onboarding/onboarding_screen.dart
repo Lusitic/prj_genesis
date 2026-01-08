@@ -2,10 +2,13 @@ import 'package:lottie/lottie.dart';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:prj_genesis/providers/locale_provider.dart';
 import '../../utilities/app_prefs.dart';
 import '../auth/login_screen.dart';
 
 import '../../l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
+import '../../providers/locale_provider.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -117,6 +120,69 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     }
   }
 
+  void _showLanguageSheet(BuildContext context) {
+    final t = AppLocalizations.of(context)!;
+    showModalBottomSheet(
+      context: context,
+      showDragHandle: true,
+      backgroundColor: const Color(0xFF1D1E3A),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(18)),
+      ),
+      builder: (_) {
+        return SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const SizedBox(height: 6),
+              Text(
+                //'Language',
+                t.language,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              const SizedBox(height: 6),
+
+              ListTile(
+                leading: const Text('🇰🇷', style: TextStyle(fontSize: 18)),
+                title: const Text('한국어', style: TextStyle(color: Colors.white)),
+                onTap: () {
+                  context.read<LocaleProvider>().setLocale(const Locale('ko'));
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                leading: const Text('🇺🇸', style: TextStyle(fontSize: 18)),
+                title: const Text('English', style: TextStyle(color: Colors.white)),
+                onTap: () {
+                  context.read<LocaleProvider>().setLocale(const Locale('en'));
+                  Navigator.pop(context);
+                },
+              ),
+
+              const SizedBox(height: 8),
+
+              // (선택) 시스템 언어로 돌아가기
+              ListTile(
+                leading: const Icon(Icons.settings_backup_restore, color: Colors.white70),
+                title: const Text('System default', style: TextStyle(color: Colors.white70)),
+                onTap: () {
+                  context.read<LocaleProvider>().clearLocale();
+                  Navigator.pop(context);
+                },
+              ),
+
+              const SizedBox(height: 10),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     // 배경색은 현재 페이지 기준으로 바뀌게 (하단 고정 영역 포함)
@@ -136,17 +202,33 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               // 상단 skip은 고정
               Align(
                 alignment: Alignment.centerRight,
-                child: TextButton(
-                  onPressed: _isLast ? null : _skipToLast, 
-                  child: Text(
-                    'skip', 
-                    style: TextStyle(
-                      color: Colors.white.withOpacity(_isLast? 0.4 : 0.9),
-                      fontSize: 14,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  //mainAxisSize: MainAxisSize.min
+                  children: [
+                    IconButton(
+                      tooltip: t.language,
+                      onPressed: () => _showLanguageSheet(context),
+                      icon: Icon(
+                        Icons.language,
+                        color: Colors.white.withOpacity(0.9),
+                      ),
                     ),
-                  ),
+                    TextButton(
+                      onPressed: _isLast ? null : _skipToLast,
+                      child: Text(
+                        'Skip',
+                        style: TextStyle(
+                          color: Colors.white.withOpacity(_isLast ? 0.4 : 0.9),
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 8), 
+                  ],
                 ),
               ),
+
 
               // 스와이프 되는 영역
               Expanded(

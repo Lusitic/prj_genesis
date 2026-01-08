@@ -2,6 +2,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:prj_genesis/providers/locale_provider.dart';
+import 'package:provider/provider.dart';
 import 'l10n/app_localizations.dart';
 
 // screens 폴더에 있는 home.dart를 import
@@ -28,29 +30,41 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'PRJ_GENESIS',
-      debugShowCheckedModeBanner: false,
+    return ChangeNotifierProvider(
+      create: (_) => LocaleProvider(),
+      child: Consumer<LocaleProvider>(
+        builder: (context, provider, _) {
+          return MaterialApp(
+            title: 'PRJ_GENESIS',
+            debugShowCheckedModeBanner: false,
 
-      supportedLocales: const [
-        Locale("en"),
-        Locale("ko"),
-      ],
+            locale: provider.locale,
+            supportedLocales: const [
+              Locale("en"),
+              Locale("ko"),
+            ],
 
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
+            /*
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            */
 
-      // 앱 공통 테마
-      theme: ThemeData(
-        useMaterial3: true,
-        // brightness: Brightness.dark, // 취향껏
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+
+            // 앱 공통 테마
+            theme: ThemeData(
+              useMaterial3: true,
+              // brightness: Brightness.dark, // 취향껏
+            ),
+
+            home: const AppGate(),
+          );
+        },
       ),
-
-      home: const AppGate(),
     );
   }
 }

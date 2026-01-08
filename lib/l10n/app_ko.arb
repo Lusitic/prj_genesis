@@ -1,6 +1,7 @@
 {
   "@@locale": "ko",
 
+  "language": "언어",
   "onboarding_main": "당신의 컬렉션에 숨결을 불어넣으세요.",
   "onboarding_main_sub": "단순한 전시를 넘어, 스포트라이트 속으로.",
   "onboarding_light_main": "빛의 미학.",
