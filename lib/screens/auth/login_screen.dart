@@ -221,13 +221,22 @@ class _LoginScreenState extends State<LoginScreen> {
               left: 0,
               right: 0,
               bottom: 0,
-              child: Center(
-                child: Text(
-                  "Lusitic © 2026. All rights reserved.",
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.white.withOpacity(0.45),
-                    letterSpacing: 0.3,
+              child: IgnorePointer(
+                ignoring: true,
+                child: SafeArea(
+                  top: false,
+                  child: Padding(
+                    padding: EdgeInsets.only(bottom: 12),
+                    child: Center(
+                      child: Text(
+                        "Lusitic © 2026. All rights reserved.",
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.white.withOpacity(0.45),
+                          letterSpacing: 0.3,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
               ),
